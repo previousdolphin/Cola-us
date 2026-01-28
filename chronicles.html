@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronicles - Chronicle of Living Artists</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Force grid with inline styles override */
+        .chronicles-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+            max-width: 1000px !important;
+            margin: 40px auto !important;
+            padding: 0 !important;
+        }
+        
+        .page-section.wide {
+            max-width: 100% !important;
+            padding: 40px 20px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="nav-header">
+        <div class="nav-logo">CoLA</div>
+        <div class="nav-controls">
+            <button class="theme-toggle">☾ Dark</button>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="etymology.html">Etymology</a>
+        <a href="chronicles.html">Chronicles</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="page-section wide" style="max-width: 100%; padding: 40px 20px;">
+            <div class="page-title">Chronicles</div>
+            <h2 class="section-title">CoLA Chronicles</h2>
+            
+            <div class="chronicles-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                <!-- 1. EGG - Active -->
+                <div class="egg-portal" data-href="chronicle-egg.html">
+                    <div class="egg-shape">
+                        <div class="egg-number">01</div>
+                        <div class="egg-title">EGG</div>
+                    </div>
+                </div>
+
+                <!-- 2. BRUSHING TEETH - Coming Soon -->
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">02</div>
+                        <div class="egg-title">BRUSHING TEETH</div>
+                    </div>
+                </div>
+
+                <!-- 3-9. Placeholders - Coming Soon -->
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">03</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">04</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">05</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">06</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">07</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">08</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+
+                <div class="egg-portal disabled">
+                    <div class="egg-shape">
+                        <div class="egg-number">09</div>
+                        <div class="egg-title">TBD</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <a href="mailto:chronicleoflivingartists@gmail.com">Contact Us</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

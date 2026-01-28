@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGG - Chronicle of Living Artists</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="nav-header">
+        <div class="nav-logo">CoLA</div>
+        <div class="nav-controls">
+            <button class="theme-toggle">☾ Dark</button>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="etymology.html">Etymology</a>
+        <a href="chronicles.html">Chronicles</a>
+    </nav>
+
+    <!-- Video Player Overlay -->
+    <div class="video-player-overlay" id="videoOverlay">
+        <div class="video-player-content">
+            <div class="video-container">
+                <button class="video-close" onclick="closeVideo()">&times;</button>
+                <div class="video-nav-left" onclick="prevVideo()"></div>
+                <video id="videoPlayer" controls playsinline></video>
+                <div class="video-nav-right" onclick="nextVideo()"></div>
+            </div>
+            <div class="video-artist-name" id="videoArtist">Artist Name</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="page-section container">
+            <a href="chronicles.html" class="video-back">← Back to Chronicles</a>
+            
+            <div class="page-title">Chronicle 01</div>
+            <h2 class="section-title">CoLA: EGG</h2>
+            
+            <div class="video-grid grid grid-4">
+                <!-- Video 1 -->
+                <div class="video-slot" data-video="videos/sample.mov" data-artist="Artist One">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Artist One</div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-slot" data-video="videos/sample.mov" data-artist="Artist Two">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Artist Two</div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-slot" data-video="videos/sample.mov" data-artist="Artist Three">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Artist Three</div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-slot" data-video="videos/sample.mov" data-artist="Artist Four">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Artist Four</div>
+                </div>
+
+                <!-- Video 5 - Empty/Coming Soon -->
+                <div class="video-slot empty">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Coming Soon</div>
+                </div>
+
+                <!-- Video 6 - Empty/Coming Soon -->
+                <div class="video-slot empty">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Coming Soon</div>
+                </div>
+
+                <!-- Video 7 - Empty/Coming Soon -->
+                <div class="video-slot empty">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Coming Soon</div>
+                </div>
+
+                <!-- Video 8 - Empty/Coming Soon -->
+                <div class="video-slot empty">
+                    <div class="video-placeholder">
+                        <span class="video-icon">▶</span>
+                    </div>
+                    <div class="video-artist-label">Coming Soon</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <a href="mailto:chronicleoflivingartists@gmail.com">Contact Us</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        let currentVideoIndex = 0;
+        const videoSlots = document.querySelectorAll('.video-slot:not(.empty)');
+        const overlay = document.getElementById('videoOverlay');
+        const player = document.getElementById('videoPlayer');
+        const artistName = document.getElementById('videoArtist');
+        
+        // Initialize video click handlers
+        videoSlots.forEach((slot, index) => {
+            slot.addEventListener('click', () => {
+                currentVideoIndex = index;
+                openVideo(index);
+            });
+        });
+        
+        function openVideo(index) {
+            const slot = videoSlots[index];
+            const videoSrc = slot.dataset.video;
+            const artist = slot.dataset.artist || 'Unknown Artist';
+            
+            player.src = videoSrc;
+            artistName.textContent = artist;
+            overlay.classList.add('active');
+            // Autoplay is OFF - user must click play
+            // player.play().catch(() => {});
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideo() {
+            player.pause();
+            player.src = '';
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function nextVideo() {
+            currentVideoIndex = (currentVideoIndex + 1) % videoSlots.length;
+            openVideo(currentVideoIndex);
+        }
+        
+        function prevVideo() {
+            currentVideoIndex = (currentVideoIndex - 1 + videoSlots.length) % videoSlots.length;
+            openVideo(currentVideoIndex);
+        }
+        
+        // Close on overlay click outside video
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeVideo();
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('active')) return;
+            if (e.key === 'Escape') closeVideo();
+            if (e.key === 'ArrowLeft') prevVideo();
+            if (e.key === 'ArrowRight') nextVideo();
+        });
+        
+        // Swipe support
+        let touchStartX = 0;
+        overlay.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        overlay.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextVideo();
+                else prevVideo();
+            }
+        });
+    </script>
+</body>
+</html>

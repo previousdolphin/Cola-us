@@ -1,596 +1,70 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronicle of Living Artists - Etymology</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        font-family: 'Georgia', 'Times New Roman', serif;
-        background-color: #d4d2cb;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    /* Fixed Header - Always Visible */
-    .fixed-header {
-        position: fixed;
-        top: 30px;
-        left: 30px;
-        z-index: 900;
-        max-width: 320px;
-    }
-
-    .fixed-header h1 {
-        font-size: 42px;
-        font-weight: 300;
-        line-height: 1.1;
-        margin-bottom: 20px;
-        letter-spacing: -1px;
-        color: #2c2c2c;
-        cursor: pointer;
-        transition: opacity 0.3s ease;
-    }
-
-    .fixed-header h1:hover {
-        opacity: 0.7;
-    }
-
-    .fixed-header .ellipsis {
-        font-size: 24px;
-        margin-bottom: 15px;
-        opacity: 0.4;
-        letter-spacing: 3px;
-        color: #2c2c2c;
-    }
-
-    .fixed-header .description {
-        font-size: 14px;
-        line-height: 1.6;
-        font-weight: 300;
-        color: #555;
-    }
-
-    /* Hamburger Button */
-    .menu-toggle {
-        position: fixed;
-        top: 240px;
-        left: 30px;
-        z-index: 1000;
-        background-color: #8b8b89;
-        border: none;
-        padding: 12px 14px;
-        cursor: pointer;
-        border-radius: 3px;
-        transition: all 0.3s ease;
-    }
-
-    .menu-toggle:hover {
-        background-color: #75756f;
-    }
-
-    .menu-toggle span {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background-color: white;
-        margin: 4px 0;
-        transition: all 0.3s ease;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(6px, 6px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Slide-out Navigation Menu */
-    .nav-menu {
-        position: fixed;
-        left: 0;
-        top: 320px;
-        width: 300px;
-        background-color: #8b8b89;
-        color: white;
-        transform: translateX(-100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 999;
-        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-        padding: 30px 40px;
-        border-radius: 0; /* Squared left edge */
-    }
-
-    .nav-menu.active {
-        transform: translateX(0);
-    }
-
-    .nav-menu a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        font-size: 14px;
-        letter-spacing: 3px;
-        padding: 20px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
-        position: relative;
-        text-align: left;
-    }
-
-    .nav-menu a:first-child {
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .nav-menu a::before {
-        content: '';
-        position: absolute;
-        left: -40px;
-        top: 0;
-        width: 4px;
-        height: 100%;
-        background-color: white;
-        transform: scaleY(0);
-        transition: transform 0.3s ease;
-    }
-
-    .nav-menu a:hover {
-        padding-left: 15px;
-        opacity: 0.8;
-    }
-
-    .nav-menu a:hover::before {
-        transform: scaleY(1);
-    }
-
-    /* Overlay */
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 898;
-    }
-
-    .overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* Floating Book Container */
-    .book-container {
-        margin: 40px auto;
-        max-width: 1100px;
-        min-height: calc(100vh - 80px);
-        background: white;
-        box-shadow: -8px 0 25px rgba(0, 0, 0, 0.1), 8px 0 25px rgba(0, 0, 0, 0.1);
-        border-radius: 0 30px 30px 0; /* SQUARED LEFT, ROUNDED RIGHT */
-        overflow: hidden;
-    }
-
-    /* Main Content */
-    .content-wrapper {
-        padding: 100px 60px 80px 400px;
-        background: white;
-        min-height: calc(100vh - 80px);
-    }
-
-    .page-title {
-        font-size: 13px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: #999;
-        margin-bottom: 60px;
-        font-weight: 400;
-    }
-
-    /* Etymology Entry */
-    .etymology-entry {
-        background: #f9f8f5;
-        padding: 40px;
-        margin-bottom: 50px;
-        border-left: 5px solid #8b8b89;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .etymology-entry .word {
-        font-size: 36px;
-        font-weight: 300;
-        color: #2c2c2c;
-        margin-bottom: 10px;
-        font-style: italic;
-    }
-
-    .etymology-entry .pronunciation {
-        font-size: 15px;
-        color: #8b8b89;
-        margin-bottom: 25px;
-        font-family: 'Courier New', monospace;
-    }
-
-    .etymology-entry .definition {
-        font-size: 17px;
-        line-height: 1.8;
-        color: #444;
-        margin-bottom: 25px;
-    }
-
-    .etymology-entry .origin {
-        font-size: 15px;
-        line-height: 1.8;
-        color: #666;
-        font-style: italic;
-        padding-left: 25px;
-        border-left: 3px solid #ddd;
-        margin-top: 20px;
-    }
-
-    /* Timeline */
-    .section-divider {
-        margin: 80px 0 70px 0;
-        text-align: center;
-        position: relative;
-    }
-
-    .section-divider::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(to right, transparent, #d0d0d0, transparent);
-    }
-
-    .section-divider span {
-        background: white;
-        padding: 0 40px;
-        font-size: 12px;
-        letter-spacing: 4px;
-        color: #999;
-        text-transform: uppercase;
-        position: relative;
-        z-index: 1;
-    }
-
-    .timeline-container {
-        position: relative;
-        padding-left: 60px;
-        margin-top: 60px;
-    }
-
-    .timeline-line {
-        position: absolute;
-        left: 20px;
-        top: 20px;
-        bottom: 20px;
-        width: 2px;
-        background: linear-gradient(to bottom, #8b8b89 0%, #c4c4c2 50%, #8b8b89 100%);
-    }
-
-    .timeline-entry {
-        position: relative;
-        margin-bottom: 70px;
-        padding-left: 0;
-    }
-
-    .timeline-entry::before {
-        content: '';
-        position: absolute;
-        left: -47px;
-        top: 10px;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background-color: #8b8b89;
-        border: 4px solid white;
-        box-shadow: 0 0 0 2px #8b8b89;
-        z-index: 2;
-    }
-
-    .timeline-date {
-        font-size: 26px;
-        font-weight: 400;
-        color: #8b8b89;
-        margin-bottom: 12px;
-        font-family: 'Georgia', serif;
-    }
-
-    .timeline-title {
-        font-size: 22px;
-        font-weight: 500;
-        color: #2c2c2c;
-        margin-bottom: 15px;
-    }
-
-    .timeline-content {
-        font-size: 17px;
-        line-height: 1.85;
-        color: #444;
-        font-weight: 300;
-    }
-
-    .timeline-content strong {
-        font-weight: 600;
-        color: #2c2c2c;
-    }
-
-    .timeline-content em {
-        font-style: italic;
-        color: #666;
-    }
-
-    /* Summary Box */
-    .summary-box {
-        background: #f9f8f5;
-        padding: 50px;
-        margin-top: 80px;
-        border: 1px solid #e0e0e0;
-        font-size: 18px;
-        line-height: 2;
-        color: #444;
-        font-style: italic;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-        .content-wrapper {
-            padding: 100px 40px 80px 40px;
-        }
-
-        .fixed-header {
-            position: relative;
-            top: 0;
-            left: 0;
-            margin: 30px 30px 20px 30px;
-            max-width: none;
-        }
-
-        .menu-toggle {
-            top: 30px;
-            left: auto;
-            right: 30px;
-        }
-
-        .nav-menu {
-            top: 80px;
-            right: 0;
-            left: auto;
-            transform: translateX(100%);
-        }
-
-        .nav-menu.active {
-            transform: translateX(0);
-        }
-
-        .book-container {
-            margin: 20px;
-            border-radius: 0 20px 20px 0;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .fixed-header h1 {
-            font-size: 32px;
-        }
-
-        .content-wrapper {
-            padding: 80px 25px 60px 25px;
-        }
-
-        .timeline-container {
-            padding-left: 50px;
-        }
-
-        .timeline-entry::before {
-            left: -42px;
-        }
-
-        .etymology-entry {
-            padding: 30px 25px;
-        }
-
-        .summary-box {
-            padding: 35px 25px;
-        }
-
-        .book-container {
-            border-radius: 0 15px 15px 0;
-        }
-    }
-</style>
-
+    <title>Chronicle of Living Artists</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Fixed Header - Always Visible -->
-    <div class="fixed-header">
-        <h1>Chronicle<br>of<br>Living<br>Artists</h1>
-
-    <div class="ellipsis">...</div>
-    
-    <p class="description">A non profit dedicated to gathering and sharing artists' work and stories through digital and printed publications.</p>
-</div>
-
-<!-- Hamburger Button -->
-<button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-</button>
-
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Navigation Menu (slides from left) -->
-<nav class="nav-menu" id="navMenu">
-    <a href="#about">ABOUT</a>
-    <a href="#chronicles">CHRONICLES</a>
-    <a href="#publications">PUBLICATIONS</a>
-    <a href="#contact">CONTACT</a>
-</nav>
-
-<!-- Floating Book Container -->
-<div class="book-container">
-    <div class="content-wrapper">
-        <div class="page-title">Etymology & Historical Timeline</div>
-
-        <div class="etymology-entry">
-            <div class="word">Chronicle</div>
-            <div class="pronunciation">/ˈkrɒnɪk(ə)l/ • Χρονικά (Chroniká)</div>
-            <div class="definition">
-                <strong>noun.</strong> A factual written account of important or historical events in the order of their occurrence; books of time; annals.
-            </div>
-            <div class="origin">
-                <strong>Origin:</strong> From Ancient Greek Χρονικά (Chroniká), neuter plural of χρονικός (chronikos, "of time"), from χρόνος (chrónos, "time"). In its purest etymological sense, a chronicle is not just a story; it is a timeline given narrative form. Unlike "History" (from historia, meaning "inquiry"), a Chronicle does not seek to analyze cause and effect—its primary mandate is to organize events strictly by the order in which they occurred in time.
-            </div>
+    <!-- Navigation -->
+    <header class="nav-header">
+        <div class="nav-logo">CoLA</div>
+        <div class="nav-controls">
+            <button class="theme-toggle">☾ Dark</button>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
+    </header>
 
-        <div class="section-divider">
-            <span>Historical Timeline</span>
-        </div>
+    <!-- Overlay -->
+    <div class="overlay"></div>
 
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="etymology.html">Etymology</a>
+        <a href="chronicles.html">Chronicles</a>
+    </nav>
 
-            <div class="timeline-entry">
-                <div class="timeline-date">c. 2400 BCE</div>
-                <div class="timeline-title">The Palermo Stone</div>
-                <div class="timeline-content">
-                    Ancient Egypt creates one of the earliest proto-chronicles: a stele fragment listing the reigns of kings from the First to Fifth Dynasties. Notably, it records the height of the Nile flood for every specific year—linking human rule to the cyclical nature of time itself.
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="home-hero container-narrow">
+            <div class="hero-visual">
+                <div class="hero-egg-container" onclick="rockEgg(this)">
+                    <div class="hero-glow"></div>
+                    <div class="hero-egg">
+                        <div class="hero-shell-upper"></div>
+                        <div class="hero-shell-lower"></div>
+                    </div>
                 </div>
             </div>
+            <h1>Chronicle of Living Artists</h1>
+            <p class="home-mission">
+                A non-profit dedicated to gathering and sharing artists' work and stories 
+                through digital and printed publications.
+            </p>
+        </section>
+    </main>
 
-            <div class="timeline-entry">
-                <div class="timeline-date">c. 2100 BCE</div>
-                <div class="timeline-title">The Sumerian King List</div>
-                <div class="timeline-content">
-                    One of humanity's oldest attempts at chronicle-making. This Mesopotamian text blends history and myth, listing kings who reigned for thousands of years alongside historically verified rulers. It represents the first human effort to create an unbroken lineage of time.
-                </div>
-            </div>
-
-            <div class="timeline-entry">
-                <div class="timeline-date">747–224 BCE</div>
-                <div class="timeline-title">The Babylonian Chronicles</div>
-                <div class="timeline-content">
-                    The birth of <strong>objective historiography</strong>. Written on clay tablets in cuneiform, these chronicles differ radically from royal propaganda. Unlike earlier inscriptions that only praised victories, the Babylonian Chronicles recorded defeats, bad omens, and even the prices of barley. They were an attempt to capture the reality of time, not just the glory of rulers.
-                </div>
-            </div>
-
-            <div class="timeline-entry">
-                <div class="timeline-date">4th Century BCE</div>
-                <div class="timeline-title">Divrei Hayamim (Biblical Chronicles)</div>
-                <div class="timeline-content">
-                    In the Hebrew Bible, the books of Chronicles (translated in the Greek Septuagint as <em>Paralipomenon</em>, meaning "things left out") retell the history of Israel. Written post-exile, these texts provided a theological timeline, grounding the returning exiles in an unbroken lineage stretching back to Adam.
-                </div>
-            </div>
-
-            <div class="timeline-entry">
-                <div class="timeline-date">c. 325 CE</div>
-                <div class="timeline-title">Chronicon of Eusebius</div>
-                <div class="timeline-content">
-                    Eusebius of Caesarea creates a universal chronicle that synchronizes the timelines of all known civilizations—Chaldean, Greek, Roman, Egyptian, and Hebrew—into one comprehensive table. This work establishes the "Chronicle" as the primary way medieval Europe understands the world: a linear progression of time from Creation to Judgment.
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <a href="mailto:chronicleoflivingartists@gmail.com">Contact Us</a>
         </div>
+    </footer>
 
-        <div class="section-divider">
-            <span>Conclusion</span>
-        </div>
-
-        <div class="summary-box">
-            The Chronika was humanity's invention to combat the chaos of memory. By binding events to Chronos (time), early humans transformed random occurrences into a structured lineage, asserting that the past was not just a collection of myths, but a measurable sequence of years—a defense against the dissolution of meaning.
-        </div>
-    </div>
-</div>
-
-<script>
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    const overlay = document.getElementById('overlay');
-
-    // Toggle navigation menu
-    menuToggle.addEventListener('click', () => {
-        menuToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-    });
-
-    // Close menu when clicking overlay
-    overlay.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        overlay.classList.remove('active');
-    });
-
-    // Close menu when clicking nav link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            menuToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            
-            // Smooth scroll to top
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Click header to scroll to top
-    document.querySelector('.fixed-header h1').addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Fade in timeline entries on scroll
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -80px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.timeline-entry, .etymology-entry').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-        observer.observe(el);
-    });
-</script>
-
+    <script src="js/main.js"></script>
+    <script>
+        function rockEgg(element) {
+            element.classList.remove('rocking');
+            void element.offsetWidth;
+            element.classList.add('rocking');
+        }
+    </script>
 </body>
 </html>
